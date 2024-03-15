@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class CardanoGrid {
-    private int[] keysArr = {4, 11, 17, 26, 7, 16, 21, 31, 36, 41, 43, 50, 40, 45, 47, 64};
+    private final int[] keys = {4, 11, 17, 26, 7, 16, 21, 31, 36, 41, 43, 50, 40, 45, 47, 64};
 
 
     public void encrypt(String message){
@@ -13,7 +13,7 @@ public class CardanoGrid {
 
     }
 
-    private String parser(String input) {
+    public String parser(String input) {
         input = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
         if (input.length() > 64) {
             input = input.substring(0, 64);
@@ -24,18 +24,16 @@ public class CardanoGrid {
         return input.toLowerCase();
 
     }
-    private char[][] getMatrix(char[][] strMatrix){
+    public char[][] getMatrix(char[][] strMatrix){
         int[][] integerMatrix = createMatrix();
         char[][] cryptoMatrix = new char[8][8];
-        ArrayList keys = new ArrayList<>();
-        keys.add(keysArr);
-        for (int a = 0; a < 3; a++) {
+        for (int rotation = 0; rotation < 3; rotation++) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
-                    //TODO Изменить условие добавления эллемента
-                    if (true){
-                        char temp = strMatrix[i][j];
-                        cryptoMatrix[i][j] = temp;
+                    for(int key : keys){
+                        if (integerMatrix[i][j] == key) {
+                            cryptoMatrix[i][j] = strMatrix[i][j];
+                        }
                     }
                 }
             }
@@ -56,7 +54,7 @@ public class CardanoGrid {
 
         return matrix;
     }
-    private int[][] createMatrix() {
+    public int[][] createMatrix() {
         int[][] matrix = new int[8][8];
         int value = 1;
         for (int i = 0; i < 8; i++) {
@@ -84,7 +82,7 @@ public class CardanoGrid {
     }
 
 
-    public static void printMatrix(char[][] matrix) {
+    public void printMatrix(char[][] matrix) {
         for (char[] row : matrix) {
             for (char cell : row) {
                 System.out.print(cell + " ");
@@ -93,7 +91,7 @@ public class CardanoGrid {
         }
 
     }
-    public static void printMatrix(int[][] matrix) {
+    public void printMatrix(int[][] matrix) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 System.out.print(matrix[i][j] + "\t");
