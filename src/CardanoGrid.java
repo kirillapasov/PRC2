@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class CardanoGrid {
     private final int[] keys = {4, 11, 17, 26, 7, 16, 21, 31, 36, 41, 43, 50, 40, 45, 47, 64};
+    private int counter = 0;
 
 
     public void encrypt(String message){
@@ -34,29 +33,37 @@ public class CardanoGrid {
                 for (int j1 = 0; j1 < 4; j1++) {
                     for (int key : keys) {
                         if (integerMatrix[i1][j1] == key) {
-                            cryptoMatrix[i1][j1] = strMatrix[i1][j1];
+                            //Todo Дописать остальные блоки по образцу со счётчиком.
+                            int i11 = (counter ) / 8;
+                            int j11 = (counter ) % 8;
+                            char temp1 = strMatrix[i11][j11] ;
+                            cryptoMatrix[i1][j1] = temp1;
+                            counter++;
                         }
                     }
                 }
             }
-
             //second block
-            for (int i2 = 4; i2 < 8; i2++ ){
-                for (int j2 = 0; j2 < 4; j2++) {
-                    for (int key : keys) {
-                        if (integerMatrix[i2][j2] == key) {
-                            cryptoMatrix[i2][j2] = strMatrix[i2][j2];
-                        }
-                    }
-                }
-            }
-
-            // thirdBlock
             for (int i3 = 0; i3 < 4; i3++ ){
                 for (int j3 = 4; j3 < 8; j3++) {
                     for (int key : keys) {
                         if (integerMatrix[i3][j3] == key) {
-                            cryptoMatrix[i3][j3] = strMatrix[i3][j3];
+                            counter++;
+                            char temp3 = strMatrix[i3][j3] ;
+                            cryptoMatrix[i3][j3] = temp3;
+                        }
+                    }
+                }
+            }
+
+            //thidrd block
+            for (int i2 = 4; i2 < 8; i2++ ){
+                for (int j2 = 0; j2 < 4; j2++) {
+                    for (int key : keys) {
+                        if (integerMatrix[i2][j2] == key) {
+                            counter++;
+                            char temp2 = strMatrix[i2][j2] ;
+                            cryptoMatrix[i2][j2] = temp2;
                         }
                     }
                 }
@@ -67,14 +74,15 @@ public class CardanoGrid {
                 for (int j4 = 4; j4 < 8; j4++) {
                     for (int key : keys) {
                         if (integerMatrix[i4][j4] == key) {
-                            cryptoMatrix[i4][j4] = strMatrix[i4][j4];
+                            counter++;
+                            char temp4 = strMatrix[i4][j4] ;
+                            cryptoMatrix[i4][j4] = temp4;
                         }
                     }
                 }
             }
 
             integerMatrix = rotateMatrix(integerMatrix);
-            strMatrix = rotateMatrix(strMatrix);
         }
         return cryptoMatrix;
     }
