@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         CardanoGrid c = new CardanoGrid();
-        String govno =  c.parser(" ");
+        String govno =  c.parser("");
         System.out.println(govno);
         System.out.println("............................");
 

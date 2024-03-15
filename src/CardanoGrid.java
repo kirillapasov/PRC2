@@ -5,6 +5,7 @@ public class CardanoGrid {
     private int counter = 0;
 
 
+    //Todo Переписать метод передачи закодированного сообщения
     public void encrypt(String message){
         printMatrix(parseStringToMatrix(parser(message)));
         System.out.println("//////////////////////////////////////");
@@ -23,6 +24,8 @@ public class CardanoGrid {
         return input.toLowerCase();
 
     }
+
+    //Todo Переписать и оптимизировать алгоритм
     public char[][] getMatrix(char[][] strMatrix){
         int[][] integerMatrix = createMatrix();
         char[][] cryptoMatrix = new char[8][8];
@@ -33,7 +36,6 @@ public class CardanoGrid {
                 for (int j1 = 0; j1 < 4; j1++) {
                     for (int key : keys) {
                         if (integerMatrix[i1][j1] == key) {
-                            //Todo Дописать остальные блоки по образцу со счётчиком.
                             int i11 = (counter ) / 8;
                             int j11 = (counter ) % 8;
                             char temp1 = strMatrix[i11][j11] ;
@@ -48,9 +50,11 @@ public class CardanoGrid {
                 for (int j3 = 4; j3 < 8; j3++) {
                     for (int key : keys) {
                         if (integerMatrix[i3][j3] == key) {
+                            int i13 = (counter ) / 8;
+                            int j13 = (counter ) % 8;
+                            char temp1 = strMatrix[i13][j13] ;
+                            cryptoMatrix[i3][j3] = temp1;
                             counter++;
-                            char temp3 = strMatrix[i3][j3] ;
-                            cryptoMatrix[i3][j3] = temp3;
                         }
                     }
                 }
@@ -61,9 +65,11 @@ public class CardanoGrid {
                 for (int j2 = 0; j2 < 4; j2++) {
                     for (int key : keys) {
                         if (integerMatrix[i2][j2] == key) {
+                            int i12 = (counter ) / 8;
+                            int j12 = (counter ) % 8;
+                            char temp1 = strMatrix[i12][j12] ;
+                            cryptoMatrix[i2][j2] = temp1;
                             counter++;
-                            char temp2 = strMatrix[i2][j2] ;
-                            cryptoMatrix[i2][j2] = temp2;
                         }
                     }
                 }
@@ -74,9 +80,11 @@ public class CardanoGrid {
                 for (int j4 = 4; j4 < 8; j4++) {
                     for (int key : keys) {
                         if (integerMatrix[i4][j4] == key) {
+                            int i14 = (counter ) / 8;
+                            int j14 = (counter ) % 8;
+                            char temp1 = strMatrix[i14][j14] ;
+                            cryptoMatrix[i4][j4] = temp1;
                             counter++;
-                            char temp4 = strMatrix[i4][j4] ;
-                            cryptoMatrix[i4][j4] = temp4;
                         }
                     }
                 }
