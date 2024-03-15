@@ -27,7 +27,7 @@ public class CardanoGrid {
     public char[][] getMatrix(char[][] strMatrix){
         int[][] integerMatrix = createMatrix();
         char[][] cryptoMatrix = new char[8][8];
-        for (int rotation = 0; rotation < 3; rotation++) {
+        for (int rotation = 0; rotation < 4; rotation++) {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     for(int key : keys){
@@ -37,7 +37,7 @@ public class CardanoGrid {
                     }
                 }
             }
-            rotateMatrix(integerMatrix);
+            integerMatrix = rotateMatrix(integerMatrix);
         }
         return cryptoMatrix;
     }
