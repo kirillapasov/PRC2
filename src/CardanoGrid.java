@@ -8,10 +8,19 @@ public class CardanoGrid {
     public String encrypt(String message) {
         String parsingMessage = parser(message);
         char[][] mask = parseStringToMatrix(parsingMessage);
-        char[][] encryptMatrix = getEncodeMatrix(mask);
+        char[][] encryptMatrix = getEncryptMatrix(mask);
         String encryptedMessage = parseMatrixToString(encryptMatrix);
         return encryptedMessage;
 
+    }
+
+    //Todo создать метод дешифровки
+    public String decrypt(String message){
+        String parsingMessage = parser(message);
+        char[][] mask = parseStringToMatrix(parsingMessage);
+        char[][] decryptMatrix = getDecryptMatrix(mask);
+        String decryptedMessage = parseMatrixToString(decryptMatrix);
+        return decryptedMessage;
     }
 
     public String parser(String input) {
@@ -27,7 +36,7 @@ public class CardanoGrid {
     }
 
     //Todo Переписать и оптимизировать алгоритм
-    public char[][] getEncodeMatrix(char[][] strMatrix) {
+    public char[][] getEncryptMatrix(char[][] strMatrix) {
         int[][] integerMatrix = createMatrix();
         char[][] cryptoMatrix = new char[8][8];
         for (int rotation = 0; rotation < 4; rotation++) {
@@ -95,6 +104,12 @@ public class CardanoGrid {
         }
         return cryptoMatrix;
     }
+    //Todo реализовать метод расшифровки матрицы
+    public char[][]  getDecryptMatrix(char[][] strMatrix){
+        int[][] integerMatrix = createMatrix();
+        char[][] decryptoMatrix = new char[8][8];
+        return decryptoMatrix;
+    }
 
     public char[][] parseStringToMatrix(String str) {
         char[][] matrix = new char[8][8];
@@ -154,11 +169,9 @@ public class CardanoGrid {
 
     private char[][] rotateMatrix(char[][] matrix) {
         int n = matrix.length;
-
         for (int layer = 0; layer < n / 2; layer++) {
             int first = layer;
             int last = n - 1 - layer;
-
             for (int i = first; i < last; i++) {
                 int offset = i - first;
                 char top = matrix[first][i];
