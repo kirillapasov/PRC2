@@ -35,6 +35,15 @@ public class CardanoGrid {
 
     }
 
+    private void zalupa(int iLower, int iUpper, int jLower, int jUpper, int[][] integerMatrix, char[][] cryptoMatrix, char[][] strMatrix){
+        for (int i = iLower; i < iUpper; i++)
+            for (int j = jLower; j < jUpper; j++)
+                for (int key: keys)
+                    if (integerMatrix[i][j] == key){
+                        cryptoMatrix[i][j] = strMatrix[counter / 8][counter % 8];
+                        counter++;
+                    }
+    }
     //Todo Переписать и оптимизировать алгоритм
     public char[][] getEncryptMatrix(char[][] strMatrix) {
         int[][] integerMatrix = createMatrix();
@@ -48,8 +57,7 @@ public class CardanoGrid {
                         if (integerMatrix[i1][j1] == key) {
                             int i11 = (counter) / 8;
                             int j11 = (counter) % 8;
-                            char temp1 = strMatrix[i11][j11];
-                            cryptoMatrix[i1][j1] = temp1;
+                            cryptoMatrix[i1][j1] = strMatrix[i11][j11];
                             counter++;
                         }
                     }
@@ -70,7 +78,7 @@ public class CardanoGrid {
                 }
             }
 
-            //thidrd block
+            //third block
             for (int i2 = 4; i2 < 8; i2++) {
                 for (int j2 = 0; j2 < 4; j2++) {
                     for (int key : keys) {
