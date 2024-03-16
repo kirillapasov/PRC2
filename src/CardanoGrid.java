@@ -34,7 +34,7 @@ public class CardanoGrid {
         return input.toLowerCase();
 
     }
-    private void zalupa(int iLower, int iUpper, int jLower, int jUpper, int[][] integerMatrix, char[][] cryptoMatrix, char[][] strMatrix){
+    private void sectorLoop(int iLower, int iUpper, int jLower, int jUpper, int[][] integerMatrix, char[][] cryptoMatrix, char[][] strMatrix){
         for (int i = iLower; i < iUpper; i++)
             for (int j = jLower; j < jUpper; j++)
                 for (int key: keys)
@@ -48,15 +48,14 @@ public class CardanoGrid {
         int[][] integerMatrix = createMatrix();
         char[][] cryptoMatrix = new char[8][8];
         for (int rotation = 0; rotation < 4; rotation++) {
-
             //first block
-            zalupa(0,4,0,4,integerMatrix,cryptoMatrix,strMatrix);
+            sectorLoop(0,4,0,4,integerMatrix,cryptoMatrix,strMatrix);
             //second block
-            zalupa(0,4,4,8,integerMatrix,cryptoMatrix,strMatrix);
+            sectorLoop(0,4,4,8,integerMatrix,cryptoMatrix,strMatrix);
             //third block
-            zalupa(4,8,0,4,integerMatrix,cryptoMatrix,strMatrix);
+            sectorLoop(4,8,0,4,integerMatrix,cryptoMatrix,strMatrix);
             // fourth block
-            zalupa(4,8,4,8,integerMatrix,cryptoMatrix,strMatrix);
+            sectorLoop(4,8,4,8,integerMatrix,cryptoMatrix,strMatrix);
             integerMatrix = rotateMatrix(integerMatrix);
         }
         return cryptoMatrix;
