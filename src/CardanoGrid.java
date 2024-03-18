@@ -1,6 +1,7 @@
 import java.util.Random;
 public class CardanoGrid {
     private final int[] keys = {4, 11, 17, 26, 7, 16, 21, 31, 36, 41, 43, 50, 40, 45, 47, 64};
+
     private int counterEncrypt = 0;
     private int counterDecrypt = 0;
     public String encrypt(String message) {
@@ -34,6 +35,8 @@ public class CardanoGrid {
                     if (integerMatrix[i][j] == key) {
                         cryptoMatrix[i][j] = strMatrix[counterEncrypt / 8][counterEncrypt % 8];
                         counterEncrypt++;
+
+
                     }
     }
     private char[][] getEncryptMatrix(char[][] strMatrix) {
@@ -45,11 +48,11 @@ public class CardanoGrid {
             sectorLoop(0, 4, 4, 8, integerMatrix, cryptoMatrix, strMatrix);
             sectorLoop(4, 8, 0, 4, integerMatrix, cryptoMatrix, strMatrix);
             sectorLoop(4, 8, 4, 8, integerMatrix, cryptoMatrix, strMatrix);
+
         }
         return cryptoMatrix;
     }
     private void sectorLoopDecrypt(int iLower, int iUpper, int jLower, int jUpper, int[][] integerMatrix, char[][] cryptoMatrix, char[][] strMatrix) {
-
         for (int keyIndex = keys.length - 1; keyIndex >= 0; keyIndex--) {
             int key = keys[keyIndex];
             for (int i = iUpper - 1; i >= iLower; i--) {
@@ -65,7 +68,6 @@ public class CardanoGrid {
     private char[][] getDecryptMatrix(char[][] cryptoMatrix) {
         char[][] strMatrix = new char[8][8];
         int[][] integerMatrix = createMatrix();
-        integerMatrix = leftRotateMatrix(integerMatrix);
         for (int rotation = 0; rotation < 4; rotation++) {
             integerMatrix = leftRotateMatrix(integerMatrix);
             sectorLoopDecrypt(4, 8, 4, 8, integerMatrix, cryptoMatrix, strMatrix);
