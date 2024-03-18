@@ -4,7 +4,10 @@ public class Main {
         CardanoGrid grid1 = new CardanoGrid();
         System.out.println(grid1.parser(message));
         System.out.println("////////////////////////////////");
-        System.out.println(grid1.encrypt(message));
+        String t1 = grid1.encrypt(message);
+        System.out.println(t1);
+        System.out.println("////////////////////////////////");
+        System.out.println(grid1.decrypt(t1));
 
-        }
     }
+}
